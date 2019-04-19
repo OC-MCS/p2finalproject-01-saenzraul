@@ -35,6 +35,33 @@ void moveShip(Sprite& ship)
 	}
 }
 
+void movemissile(Sprite& missile)
+{
+	const float DISTANCE = 10.0f;
+	missile.move(0, -DISTANCE);
+}
+
+void movealien(Sprite& alien)
+{
+	const float DISTANCE = 5.0f;
+	const float MINUSDISTANCE = -5.0f;
+	Vector2f kat = alien.getPosition();
+	bool moveleft = false;
+	if (kat.x >= 400) {
+		moveleft = true;
+	}
+	else if (kat.x < 10) {
+		moveleft = false;
+	}
+
+	if (moveleft) {
+		alien.move(MINUSDISTANCE, 0);
+	}
+	else {
+		alien.move(DISTANCE, 0);
+	}
+}
+
 
 
 int main()
@@ -61,6 +88,16 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 
+	Texture missileTexture;
+	if (!missileTexture.loadFromFile("missile.png"))
+	{
+		cout << "Unable to load missile texture!" << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	
+
+
 	// A sprite is a thing we can draw and manipulate on the screen.
 	// We have to give it a "texture" to specify what it looks like
 
@@ -72,11 +109,17 @@ int main()
 	// create sprite and texture it
 	Sprite ship;
 	ship.setTexture(shipTexture);
+	
+	Sprite missile;
+	missile.setTexture(missileTexture);
 
+	/*Sprite alien;
+	alien.setTexture(alienTexture);
+	alien.setScale(.1, .1);*/
 
 	// initial position of the ship will be approx middle of screen
 	float shipX = window.getSize().x / 2.0f;
-	float shipY = window.getSize().y / 2.0f;
+	float shipY = window.getSize().y / 1.5f;
 	ship.setPosition(shipX, shipY);
 
 
@@ -95,7 +138,10 @@ int main()
 			{
 				if (event.key.code == Keyboard::Space)
 				{
-					// handle space bar
+					// ***Add code to initialize missile position 
+					Vector2f pos = ship.getPosition();
+					pos.x += 7;
+					missile.setPosition(pos.x, pos.y);
 				}
 				
 			}
@@ -116,6 +162,12 @@ int main()
 		// draw the ship on top of background 
 		// (the ship from previous frame was erased when we drew background)
 		window.draw(ship);
+		movemissile(missile);
+		window.draw(missile);
+
+		//movealien(alien);
+
+		//window.draw(alien);
 
 
 		// end the current frame; this makes everything that we have 
