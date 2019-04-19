@@ -155,22 +155,14 @@ int main()
 	bool hasWon = false;
 	bool hasLost = false;
 
-	while (window.isOpen())
-	{
-
+	while (window.isOpen()){
 		Event event;
-		if (play.getLevel() == 0)
-		{
-
-			while (window.pollEvent(event))
-			{
+		if (play.getLevel() == 0){
+			while (window.pollEvent(event)){
 				// "close requested" event: we close the window
 				if (event.type == Event::Closed)
 					window.close();
-
-
-				else if (event.type == Event::MouseButtonReleased)
-				{
+				else if (event.type == Event::MouseButtonReleased){
 					//userinput for settings
 					Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
 					drawUI.beginGame(mousePos, play);
@@ -179,45 +171,34 @@ int main()
 			window.clear();
 			window.draw(background);
 			drawUI.drawStart(window);
-			if (hasWon == true)
-			{
+			if (hasWon == true){
 				drawUI.drawWinner(window);
 			}
-			if (hasLost == true)
-			{
+			if (hasLost == true){
 				drawUI.drawEndGame(window);
 			}
 			window.display();
-		}
-		else if (play.getLevel() == 1 && play.getLives() > 0)
-		{
-			if (hasWon == true)
-			{
+		} else if (play.getLevel() == 1 && play.getLives() > 0) {
+			if (hasWon == true) {
 				drawUI.drawWinner(window);
 			}
 			counter++;
-			if ((counter % 15) == 14)
-			{
+			if ((counter % 15) == 14) {
 				shoot = true;
 			}
-			while (window.pollEvent(event))
-			{
+			while (window.pollEvent(event)) {
 				// "close requested" event: we close the window
 				if (event.type == Event::Closed)
 					window.close();
-				else if (event.type == Event::KeyPressed)
-				{
-					if (event.key.code == Keyboard::Space && shoot == true)
-					{
+				else if (event.type == Event::KeyPressed) {
+					if (event.key.code == Keyboard::Space && shoot == true) {
 						// handle space bar
 						Missile *missile = new Missile(ship.getPosition(), missileTexture);
 						missileMgr.addMissile(*missile);
 						shoot = false;
 					}
-
 				}
 			}
-
 			window.clear();
 			window.draw(background);
 			moveShip(ship);
@@ -226,6 +207,7 @@ int main()
 			drawUI.drawLives(window, play);
 			drawUI.drawLevel(window, play);
 			alienMgr.setHit(missileMgr);
+			// Resets Game when Aliens go past screen can't figure out how to move aliens back
 			if (alienMgr.removeAlien(ship, play) == true) {
 				window.clear();
 				window.draw(background);
@@ -241,25 +223,20 @@ int main()
 			missileMgr.removeMissile(background);
 			missileMgr.drawMissiles(window);
 
-
-			if (counter % 50 == 1)
-			{
+			if (counter % 50 == 1){
 				drop = true;
 			}
 			randomNum = (rand() % 20);
-			if (randomNum == 1 && drop == true)
-			{
+			if (randomNum == 1 && drop == true){
 				alienMgr.dropBombs(bombTexture, bombMgr);
 				drop = false;
 			}
 
-			if (alienMgr.returnAlienCount() == 0)
-			{
+			if (alienMgr.returnAlienCount() == 0){
 				play.setLevel(2);
 			}
 
-			if (play.getLives() == 0)
-			{
+			if (play.getLives() == 0) {
 				window.clear();
 				window.draw(background);
 				drawUI.drawEndGame(window);
@@ -269,42 +246,33 @@ int main()
 			}
 
 			window.display();
-		}
-		else if (play.getLevel() == 2 && play.getLives() > 0)
-		{
+		} else if (play.getLevel() == 2 && play.getLives() > 0) {
 			counter++;
-			if ((counter % 15) == 14)
-			{
+			if ((counter % 15) == 14) {
 				shoot = true;
 			}
-			while (window.pollEvent(event))
-			{
+			while (window.pollEvent(event)) {
 				// "close requested" event: we close the window
 				if (event.type == Event::Closed)
 					window.close();
-				else if (event.type == Event::KeyPressed)
-				{
-					if (event.key.code == Keyboard::Space && shoot == true)
-					{
+				else if (event.type == Event::KeyPressed) {
+					if (event.key.code == Keyboard::Space && shoot == true) {
 						// handle space bar
 						Missile *missile = new Missile(ship.getPosition(), missileTexture);
 						missileMgr.addMissile(*missile);
 						shoot = false;
 					}
-
 				}
 			}
 			window.clear();
 			window.draw(background);
 			moveShip(ship);
 			window.draw(ship);
-			if (counter % 20 == 1)
-			{
+			if (counter % 20 == 1) {
 				drop = true;
 			}
 			randomNum = (rand() % 35);
-			if (randomNum == 1 && drop == true)
-			{
+			if (randomNum == 1 && drop == true){
 				level2Aliens.dropBombs(bombTexture, bombMgr);
 				drop = false;
 			}
@@ -313,7 +281,7 @@ int main()
 			drawUI.drawLives(window, play);
 			drawUI.drawLevel(window, play);
 			level2Aliens.setHit(missileMgr);
-			level2Aliens.removeAlien(ship, play);
+			// Resets Game when Aliens go past screen can't figure out how to move aliens back
 			if (level2Aliens.removeAlien(ship, play) == true) {
 				window.clear();
 				window.draw(background);
@@ -329,8 +297,7 @@ int main()
 			missileMgr.removeMissile(background);
 			missileMgr.drawMissiles(window);
 
-			if (play.getLives() == 0)
-			{
+			if (play.getLives() == 0) {
 				window.clear();
 				window.draw(background);
 				drawUI.drawEndGame(window);
@@ -338,8 +305,7 @@ int main()
 				drawUI.drawStart(window);
 				hasLost = true;
 			}
-			if (play.getKills() == 20)
-			{
+			if (play.getKills() == 20) {
 				window.clear();
 				window.draw(background);
 				drawUI.drawWinner(window);
@@ -369,11 +335,6 @@ int main()
 		// will appear on top of background
 		window.draw(background);
 
-
-
-
-
-		//userint.drawNUMLEVEL(window);
 
 		// draw the ship on top of background 
 		// (the ship from previous frame was erased when we drew background)

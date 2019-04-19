@@ -17,7 +17,7 @@ public:
 	DrawUI() {
 		Vector2f size(80, 30);
 		startBtn.setSize(size);
-		startBtn.setPosition(375, 300);
+		startBtn.setPosition(385, 375);
 		startBtn.setFillColor(Color::Black);
 
 		if (!font.loadFromFile("C://Windows//Fonts//alger.ttf")) {
@@ -31,11 +31,15 @@ public:
 	void drawStart(RenderWindow & win) {
 		Text title("ALIENS", font2, 72);
 		title.setPosition(325, 200);
+		Text sub("A Programing Story", font2, 36);
+		sub.setPosition(290, 300);
+		sub.setFillColor(Color::White);
 		title.setFillColor(Color::White);
-		Text text("PLAY", font, 25);
+		Text text("PLAY", font2, 25);
 		text.setPosition(startBtn.getPosition());
 		text.setFillColor(Color::White);
 		win.draw(title);
+		win.draw(sub);
 		win.draw(startBtn);
 		win.draw(text);
 	}
@@ -57,7 +61,7 @@ public:
 	void drawLevel(RenderWindow & win, CurrentPlayer &p) {
 		string text = "Level:  " + to_string(p.getLevel());
 		Text display(text, font, 25);
-		display.setPosition(275, 0);
+		display.setPosition(350, 0);
 		display.setFillColor(Color::White);
 		win.draw(display);
 	}
@@ -81,7 +85,7 @@ public:
 	void drawLives(RenderWindow & win, CurrentPlayer p) {
 		string text = "Lives:  " + to_string(p.getLives());
 		Text display(text, font, 25);
-		display.setPosition(400, 0);
+		display.setPosition(700, 0);
 		display.setFillColor(Color::White);
 		win.draw(display);
 	}

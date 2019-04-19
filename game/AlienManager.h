@@ -17,6 +17,11 @@ private:
 	list<Alien> alienList;
 
 public:
+	//====================================================== 
+	//AlienManager(): constructor
+	// parameters: Texture &
+	// return type: n/a
+	//====================================================== 
 	AlienManager(Texture &text) {
 		Vector2f pos(20,0);
 		for (int i = 0; i < 10; i++) {
@@ -26,11 +31,21 @@ public:
 
 	}
 
+	//====================================================== 
+	// addAlien(): Add Alien to List of Aliens
+	// parameters: Vector2f pos, Texture &text
+	// return type: n/a
+	//====================================================== 
 	void addAlien(Vector2f pos, Texture &text) {
 		Alien *alien = new Alien(pos, text);
 		alienList.push_back(*alien);
 	}
 
+	//====================================================== 
+	// removeAlien(): removes Alien once hit, helps sense bottom
+	// parameters: Sprite, Current Player
+	// return type: Bool
+	//====================================================== 
 	bool removeAlien(Sprite &s, CurrentPlayer &p) {
 		list<Alien>::iterator iter;
 		bool isBottom = false;
@@ -57,7 +72,11 @@ public:
 		}
 		return isBottom;
 	}
-
+	//====================================================== 
+	// Draw(), Draws Missile
+	// parameters: RenderWindow
+	// return type: n/a
+	//====================================================== 
 	void draw(RenderWindow &win) {
 		list<Alien>::iterator iter;
 
@@ -66,12 +85,12 @@ public:
 			iter->draw(win);
 		}
 	}
-	/*******
-	setHit
-	- Goes through each alien and missile and checks if they have collided
-	Prams: missile manager
-	Returns: None
-	*****/
+	
+	//====================================================== 
+	// setHit(): determines whether missile hit or not
+	// parameters: Missilemanager
+	// return type: n/a
+	//====================================================== 
 	void setHit(MissileManager &mgr) {
 		list<Alien>::iterator iter;
 		list<Missile>::iterator it;
@@ -87,7 +106,11 @@ public:
 		mgr.setList(missilelist);
 	}
 
-
+	//====================================================== 
+	// setPosition(): determines whether missile hit or not
+	// parameters: ector2f pos
+	// return type: n/a
+	//====================================================== 
 	void dropBombs(Texture &text, BombManager &bombMgr) {
 		int x;
 		list<Alien>::iterator iter;
