@@ -63,7 +63,7 @@ public:
 	}
 
 	void drawEndGame(RenderWindow & win) {
-		string text = "Game over. You Lost XD";
+		string text = "Game over. You Lost";
 		Text display(text, font, 40);
 		display.setPosition(200, 100);
 		display.setFillColor(Color::White);

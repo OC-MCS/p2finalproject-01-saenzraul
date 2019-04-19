@@ -217,6 +217,7 @@ int main()
 
 				}
 			}
+
 			window.clear();
 			window.draw(background);
 			moveShip(ship);
@@ -225,7 +226,14 @@ int main()
 			drawUI.drawLives(window, play);
 			drawUI.drawLevel(window, play);
 			alienMgr.setHit(missileMgr);
-			alienMgr.removeAlien(ship, play);
+			if (alienMgr.removeAlien(ship, play) == true) {
+				window.clear();
+				window.draw(background);
+				drawUI.drawEndGame(window);
+				resetGame(AlienTexture, level2Alien, play, alienMgr, level2Aliens);
+				drawUI.drawStart(window);
+				hasLost = true;
+			}
 			alienMgr.draw(window);
 			bombMgr.removeBomb(ship, play);
 			bombMgr.setHits(ship);
@@ -306,6 +314,14 @@ int main()
 			drawUI.drawLevel(window, play);
 			level2Aliens.setHit(missileMgr);
 			level2Aliens.removeAlien(ship, play);
+			if (level2Aliens.removeAlien(ship, play) == true) {
+				window.clear();
+				window.draw(background);
+				drawUI.drawEndGame(window);
+				resetGame(AlienTexture, level2Alien, play, alienMgr, level2Aliens);
+				drawUI.drawStart(window);
+				hasLost = true;
+			}
 			level2Aliens.draw(window);
 			bombMgr.removeBomb(ship, play);
 			bombMgr.setHits(ship);

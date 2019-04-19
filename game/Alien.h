@@ -51,17 +51,17 @@ public:
 	}
 
 	//====================================================== 
-	// makehit(): determines whether missile hit or not
-	// parameters: ector2f pos, Missile &mis
-	// return type: n/a
+	// getPosition: returns current position of Alien
+	// parameters: n/a
+	// return type: alien.getPosition()
 	//====================================================== 
 	Vector2f getPosition() {
 		return alien.getPosition();
 	}
 
 	//====================================================== 
-	// makehit(): determines whether missile hit or not
-	// parameters: ector2f pos, Missile &mis
+	// Draw(): Draws current Alien position
+	// parameters: RenderWindow
 	// return type: n/a
 	//====================================================== 
 	void draw(RenderWindow &win) {
@@ -70,8 +70,8 @@ public:
 	}
 
 	//====================================================== 
-	// makehit(): determines whether missile hit or not
-	// parameters: ector2f pos, Missile &mis
+	// dropBomb(): drops bomb from alien
+	// parameters: Texture, Bomb Manager
 	// return type: n/a
 	//====================================================== 
 	void dropBomb(Texture &text, BombManager &list) {
@@ -80,20 +80,22 @@ public:
 	}
 
 	//====================================================== 
-	// makehit(): determines whether missile hit or not
-	// parameters: ector2f pos, Missile &mis
-	// return type: n/a
+	// returnInitialPos(): Returns initial Alien Position
+	// parameters: 
+	// return type: InitialPos
 	//====================================================== 
 	Vector2f returnInitialPos() {
 		return initialPos;
 	}
 
 	//====================================================== 
-	// makehit(): determines whether missile hit or not
-	// parameters: ector2f pos, Missile &mis
+	// setPosition(): determines whether missile hit or not
+	// parameters: ector2f pos
 	// return type: n/a
 	//====================================================== 
 	void setPosition(Vector2f pos) {
 		alien.setPosition(pos);
 	}
+
+	
 };

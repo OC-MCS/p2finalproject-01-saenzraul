@@ -10,6 +10,7 @@ using namespace sf;
 #include "Bomb.h"
 #include "BombManager.h"
 #include "CurrentPlayer.h"
+#include "DrawUI.h"
 
 class AlienManager {
 private:
@@ -17,9 +18,7 @@ private:
 
 public:
 	AlienManager(Texture &text) {
-		Vector2f pos;
-		pos.y = 20;
-		pos.x = 0;
+		Vector2f pos(20,0);
 		for (int i = 0; i < 10; i++) {
 			pos.x += 65;
 			addAlien(pos, text);
@@ -32,8 +31,9 @@ public:
 		alienList.push_back(*alien);
 	}
 
-	void removeAlien(Sprite &s, CurrentPlayer &p) {
+	bool removeAlien(Sprite &s, CurrentPlayer &p) {
 		list<Alien>::iterator iter;
+		bool isBottom = false;
 		for (iter = alienList.begin(); iter != alienList.end(); ) {
 			if (iter->returnHit() == true) {
 				int kills = p.getKills();
@@ -47,13 +47,15 @@ public:
 				int life = p.getLives();
 				life--;
 				p.setLives(life);
-
+				iter = alienList.erase(iter);
+				isBottom = true;
 			}
 			else {
 				iter++;
 			}
 
 		}
+		return isBottom;
 	}
 
 	void draw(RenderWindow &win) {
