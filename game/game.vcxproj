@@ -146,14 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Alien.cpp" />
-    <ClCompile Include="AlienManager.cpp" />
-    <ClCompile Include="Bomb.cpp" />
-    <ClCompile Include="BombManager.cpp" />
-    <ClCompile Include="CurrentPlayer.cpp" />
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="Missile.cpp" />
-    <ClCompile Include="MissileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Readme.txt" />
@@ -161,10 +154,10 @@
   <ItemGroup>
     <ClInclude Include="Alien.h" />
     <ClInclude Include="AlienManager.h" />
-    <ClInclude Include="AlienTexture.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="BombManager.h" />
     <ClInclude Include="CurrentPlayer.h" />
+    <ClInclude Include="DrawUI.h" />
     <ClInclude Include="Missile.h" />
     <ClInclude Include="MissileManager.h" />
   </ItemGroup>

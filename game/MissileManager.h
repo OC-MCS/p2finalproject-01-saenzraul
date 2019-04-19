@@ -12,10 +12,36 @@ private:
 	list<Missile> listOfMissiles;
 
 public:
-	MissileManager();
-	void addMissile(Missile m);
-	void removeMissile(Sprite Backdrop);
-	void draw(RenderWindow &win);
-	list<Missile> returnMissileList();
-	void setList(list<Missile> x);
+	void addMissile(Missile m) {
+		listOfMissiles.push_back(m);
+	}
+
+	void drawMissiles(RenderWindow &win) {
+		list<Missile>::iterator iter;
+		for (iter = listOfMissiles.begin(); iter != listOfMissiles.end(); iter++) {
+			iter->draw(win);
+		}
+
+	}
+
+	void removeMissile(Sprite background) {
+		list<Missile>::iterator iter;
+		for (iter = listOfMissiles.begin(); iter != listOfMissiles.end(); ) {
+			if (!background.getGlobalBounds().contains(iter->getPosition()) || iter->getCollision() == true) {
+				iter = listOfMissiles.erase(iter);
+			}
+			else {
+				iter++;
+			}
+		}
+
+	}
+
+	list<Missile> returnMissileList() {
+		return listOfMissiles;
+	}
+
+	void setList(list<Missile> x) {
+		listOfMissiles = x;
+	}
 };

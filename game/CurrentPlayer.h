@@ -11,12 +11,33 @@ private:
 	int currentLevel;
 	RectangleShape startButton;
 public:
-	CurrentPlayer();
-	int getLevel();
-	int getKills();
-	int getLives();
-	void setLevel(int level);
-	void setKills(int kills);
-	void setLives(int lives);
+	CurrentPlayer() {
+		currentLevel = 0;
+		livesLeft = 3;
+		aliensKilled = 0;
+	}
 
+	int getLevel() {
+		return currentLevel;
+	}
+
+	int getLives() {
+		return livesLeft;
+	}
+
+	int getKills() {
+		return aliensKilled;
+	}
+
+	void setLevel(int x) {
+		currentLevel = x;
+	}
+
+	void setLives(int x) {
+		livesLeft = x;
+	}
+
+	void setKills(int x) {
+		aliensKilled = x;
+	}
 };
