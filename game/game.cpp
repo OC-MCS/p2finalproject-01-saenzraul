@@ -168,7 +168,7 @@ int main()
 		//movealien(alien);
 
 		//window.draw(alien);
-
+		//work
 
 		// end the current frame; this makes everything that we have 
 		// already "drawn" actually show up on the screen
